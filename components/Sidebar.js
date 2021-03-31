@@ -8,7 +8,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-import chat from "../pages/chat";
+import Chat from "./Chat";
 
 function Sidebar() {
   const [user] = useAuthState(auth);
@@ -58,6 +58,10 @@ function Sidebar() {
         <SearchInput placeholder="Search" />
       </Search>
       <SidebarButton onClick={createChat}>Start a new Chat</SidebarButton>
+
+      {chatsSnapshot?.docs.map((chat) => (
+        <Chat key={chat.id} id={chat.id} users={chat.data().users} />
+      ))}
     </Container>
   );
 }
