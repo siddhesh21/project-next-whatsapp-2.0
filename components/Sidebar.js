@@ -15,7 +15,7 @@ function Sidebar() {
   const userChatRef = db
     .collection("chats")
     .where("users", "array-contains", user.email);
-  const [chatsSnapshot] = useCollection(userChatRef);
+  const [chatsSnapshot, loading] = useCollection(userChatRef);
 
   const createChat = () => {
     const input = prompt(
@@ -25,7 +25,7 @@ function Sidebar() {
 
     if (
       EmailValidator.validate(input) &&
-      !chatAlreadyExists(input) &&
+      !chatAlreadyExist(input) &&
       input !== user.email
     ) {
       db.collection("chats").add({
@@ -34,7 +34,7 @@ function Sidebar() {
     }
   };
 
-  const chatAlreadyExists = (recipientEmail) =>
+  const chatAlreadyExist = (recipientEmail) =>
     !!chatsSnapshot?.docs.find(
       (chat) =>
         chat.data().users.find((user) => user === recipientEmail)?.length > 0
@@ -43,7 +43,7 @@ function Sidebar() {
   return (
     <Container>
       <Header>
-        <UserAvatar onClick={() => auth.signOut()} />
+        <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
         <IconsContainer>
           <IconButton style={{ color: "white" }}>
             <ChatIcon />
