@@ -1,5 +1,9 @@
 ## This is private messaging application is made with Next.js and deployed on Vercel.
 
+### Using Google Authentication and Firestore Database.
+
+### Next.js: Making use of awesome server side rendering and static side generation which is snappiest in rendering data even when client is updating where it will swap the static data with real-time information from FIREBASE FIRESTORE.
+
 ## Main functionality is one-to-one messaging and even able to see their LIVE status.
 
 ## Here is the Link to checkout the App: https://project-next-whatsapp-2-0.vercel.app/
